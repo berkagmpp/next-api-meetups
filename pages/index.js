@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import MeetupList from '../components/meetups/MeetupList';
 
 const DUMMY_DATA = [
@@ -18,17 +17,21 @@ const DUMMY_DATA = [
     }
 ];
 
-const HomePage = () => {
-    const [loadedMeetups, setLoadedMeetups] = useState([]);
-    
-    useEffect(() => {
-        // send a HTTP request and fetch data
-        setLoadedMeetups(DUMMY_DATA);     // using DUMMY_DATA as the loadedMeetups
-    }, []);
-
+const HomePage = (props) => {   // this props is for getStaticProps fn below
     return (
-        <MeetupList meetups={loadedMeetups} />
+        <MeetupList meetups={props.meetupData} />
     );
+};
+
+// getStaticProps allows async and NextJS will wait until the data loaded
+export function getStaticProps() {   //  only works in component files inside of the pages folders
+    //  fetch data from an API
+    return {    //  getStaticProps fn should always return a props obj
+        props: {
+            meetupData: DUMMY_DATA
+        }
+    };
+
 };
 
 export default HomePage;
