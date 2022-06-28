@@ -9,4 +9,18 @@ const MeetupDetails = () => {
     );
 };
 
+export async function getStaticProps(context) {
+    const meetupId = context.params.meetupId;   // context.params.meetupId is identified from [meetupid] folder
+
+    return {
+        props: {
+            id: meetupId,
+            image: "https://www.interest.co.nz/sites/default/files/feature_images/65%20Federal%20Harbour%20View.jpg",
+            title: "The First Meetup",
+            address: "5 Howe Street, Freemansbay, Auckland",
+            description: "This is the first meetup!"
+        }
+    };
+};
+
 export default MeetupDetails;
