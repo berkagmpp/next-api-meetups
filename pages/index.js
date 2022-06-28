@@ -23,27 +23,30 @@ const HomePage = (props) => {   // this props is for getStaticProps fn below
     );
 };
 
-export async function getServerSideProps() {  
-    //  fetch data from an API
-    return {
-        props: {
-            meetupData: DUMMY_DATA
-        }
-        // getServerSideProps fn runs for every incoming requests anyways, so revalidate is not neccessary
-    };
-
-};
-
-// getStaticProps allows async and NextJS will wait until the data loaded
-// export async function getStaticProps() {   //  only works in component files inside of the pages folders
+// export async function getServerSideProps(context) {
+//     const req = context.req;
+//     const res = context.res;
+    
 //     //  fetch data from an API
-//     return {    //  getStaticProps fn should always return a props obj
+//     return {
 //         props: {
 //             meetupData: DUMMY_DATA
-//         },
-//         revalidate: 30      // every 30 seconds, the data will updated without re-deploy or re-build manually after deployment
+//         }
+//         // getServerSideProps fn runs for every incoming requests anyways, so revalidate is not neccessary
 //     };
 
 // };
+
+// getStaticProps allows async and NextJS will wait until the data loaded
+export async function getStaticProps() {   //  only works in component files inside of the pages folders
+    //  fetch data from an API
+    return {    //  getStaticProps fn should always return a props obj
+        props: {
+            meetupData: DUMMY_DATA
+        },
+        revalidate: 30      // every 30 seconds, the data will updated without re-deploy or re-build manually after deployment
+    };
+
+};
 
 export default HomePage;
