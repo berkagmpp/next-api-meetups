@@ -24,7 +24,7 @@ const HomePage = (props) => {   // this props is for getStaticProps fn below
 };
 
 // getStaticProps allows async and NextJS will wait until the data loaded
-export function getStaticProps() {   //  only works in component files inside of the pages folders
+export async function getStaticProps() {   //  only works in component files inside of the pages folders
     //  fetch data from an API
     return {    //  getStaticProps fn should always return a props obj
         props: {
