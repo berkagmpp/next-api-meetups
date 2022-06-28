@@ -1,11 +1,21 @@
-// this is never be exposed to the client, use always credential
+import { MongoClient } from 'mongodb';
+
+// this is never be exposed to the client, always credential
+// this is a secure place to store credential
 // POST /api/new-meetup
 
-function handler (req, res) {
+async function handler (req, res) {
     if (req.method === 'POST') {
         const data = req.body;
 
-        const { title, image, address, description } = data;
+        const client = await MongoClient.connect('mongodb+srv://Berkagmpp:iHvCmVMWmdAmfW7m@cluster0.xhth6cm.mongodb.net/meetups?retryWrites=true&w=majority');
+        const db = client.db();
+
+        const meetupCollection = db.collection('meetups');
+
+        const result = await meetupCollection.insertOne(data);   //  insert 1 new documents (data) into this meetupCollection
+
+        console.log(result);
     };
 };
 
