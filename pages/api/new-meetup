@@ -16,6 +16,11 @@ async function handler (req, res) {
         const result = await meetupCollection.insertOne(data);   //  insert 1 new documents (data) into this meetupCollection
 
         console.log(result);
+
+        client.close();     // close the database connection once it's done
+
+        // from here send response
+        res.status(201).json({message: 'Meetup inserted!'});    // set a HTTP status code of the reponse which will be returned
     };
 };
 
