@@ -29,7 +29,8 @@ export async function getStaticProps() {   //  only works in component files ins
     return {    //  getStaticProps fn should always return a props obj
         props: {
             meetupData: DUMMY_DATA
-        }
+        },
+        revalidate: 30      // every 30 seconds, the data will updated without re-deploy or re-build manually after deployment
     };
 
 };
