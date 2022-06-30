@@ -2,12 +2,12 @@ import { MongoClient, ObjectId } from 'mongodb';
 
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
-const MeetupDetails = () => {
+const MeetupDetails = (props) => {
     return (
-        <MeetupDetail image="https://www.interest.co.nz/sites/default/files/feature_images/65%20Federal%20Harbour%20View.jpg"
-                      title="The First Meetup"
-                      address="5 Howe Street, Freemansbay, Auckland"
-                      description="This is the first meetup!" />
+        <MeetupDetail image={props.meetupData.image}
+                      title={props.meetupData.title}
+                      address={props.meetupData.address}
+                      description={props.meetupData.description} />
     );
 };
 
