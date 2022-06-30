@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
@@ -37,13 +37,21 @@ export async function getStaticProps(context) {
     const client = await MongoClient.connect('mongodb+srv://Berkagmpp:iHvCmVMWmdAmfW7m@cluster0.xhth6cm.mongodb.net/meetups?retryWrites=true&w=majority');
     const db = client.db();
     const meetupCollection = db.collection('meetups');
-    const selectedMeetup = await meetupCollection.findOne({_id: meetupId});
+    const selectedMeetup = await meetupCollection.findOne({
+        _id: ObjectId(meetupId)
+    });
 
     client.close();     // close the database connection once it's done
 
     return {
         props: {
-            meetupData: selectedMeetup,
+            meetupData: {
+                id: selectedMeetup._id.toString(),
+                title: selectedMeetup.title,
+                image: selectedMeetup.image,
+                address: selectedMeetup.address,
+                description: selectedMeetup.description
+            },
         }
     };
 };
